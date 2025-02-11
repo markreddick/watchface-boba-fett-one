@@ -1,0 +1,9 @@
+THINKING OFF HAND THAST NORTH ARENA FONT LOOKS VERY MUCH LIKE FETT FACE FONT WITHOUT THE LINES CUTOUT - MAYBE CAN CUTOUT LINES AFTER ADDING TO FACE??
+
+HOW TO GRUNGIFY IN INKSCAPE:
+
+- vector has to be one object
+- copy a "grunge" texture into inkscape
+- select both
+- go to Object->Mask->Set Mask
+- done
