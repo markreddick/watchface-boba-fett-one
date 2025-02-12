@@ -7,3 +7,48 @@ HOW TO GRUNGIFY IN INKSCAPE:
 - select both
 - go to Object->Mask->Set Mask
 - done
+
+
+VECTOR NUMBERS:
+- the ones i created
+- drop shadow seems to work well to mimic the lighted edges of original
+	- settings:
+	- blur radius: 0.0
+	- horiz offset (px): 0.1
+	- vert offset (px): 0.1
+	- shadow type: inner
+	- blur color: 255, 255, 255, 72 (alpha)
+
+GUNK:
+
+- seems to work well in my quick test:
+	- create little random vector using bezier tool
+	- fill object with black/gray
+	- filter->bumps->bubbly bumps (maybe others better?)
+
+POSSIBLE FONTS:
+
+eco-drive dial: 
+
+Adelle Sans Devanagari
+Andale Mono
+Apple SD Gothic Neo
+Kohinoor Devangari
+Mukta **
+Mukta Vaani **
+Nanum Gothic - Regular / Bold **
+
+
+DAY OF WEEK DIAL:
+
+Arial
+DIN Alternate
+Helvetica Bold **
+SF Compact Display (bold?) *
+SF Pro DIsplay (bold?) *
+
+
+SKULL DIAL:
+
+- check North Arena
+z
