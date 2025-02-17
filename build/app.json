@@ -2,15 +2,15 @@
   "configVersion": "v2",
   "app": {
     "appId": 26785,
-    "appName": "Empty",
+    "appName": "Boba Fett One",
     "appType": "watchface",
     "version": {
       "code": 1,
       "name": "1.0.0"
     },
-    "icon": "icon.png",
+    "icon": "preview.png",
     "vender": "zepp",
-    "description": "empty watchface"
+    "description": "Citizen Star Wars Boba Fett"
   },
   "permissions": [],
   "runtime": {
@@ -50,7 +50,7 @@
   },
   "i18n": {
     "en-US": {
-      "appName": "Empty"
+      "appName": "Boba Fett One"
     }
   },
   "defaultLanguage": "en-US"
