@@ -101,17 +101,6 @@ export function buildView() {
         minute_path: 'hand-minute-aod.png',
         show_level: hmUI.show_level.ONLY_AOD,
     });
-    
-    /* ORIGINALLY WAS DOING THIS EVERY MIN AS NOT SURE WHAT getHours
-       WILL GET ME WITH THE onPerhHourEnd callback - going to try
-       THAT SINCE IT WOULD USE LESS PROCESSING (1/hr vs 1/min)
-       BUT MAY NEED TO FALLBACK TO THIS IF THAT DOESNT WORK
-    
-    time.onPerMinute(function() {
-        const angle = time.getHours() * 15;
-        subdial_24_widget.setProperty(hmUI.prop.ANGLE, angle);
-    });
-    */
 
     time.onPerHourEnd(function() {
         const angle = time.getHours() * 15;
