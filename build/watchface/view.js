@@ -54,7 +54,6 @@ export function buildView() {
     });
 
     const angle_dow = time.getDay() * 51.429;
-    console.log('dow angel', angle_dow);
     let subdial_dow_widget = hmUI.createWidget(hmUI.widget.IMG, {
         src: 'hand-subdial-square.png',
         x: 88,
@@ -102,10 +101,18 @@ export function buildView() {
         show_level: hmUI.show_level.ONLY_AOD,
     });
 
+    /* hour listener didn't seem to be working - actual watchface was not updating
+    so going to use minute listener for now
     time.onPerHourEnd(function() {
         const angle = time.getHours() * 15;
         subdial_24_widget.setProperty(hmUI.prop.ANGLE, angle);
     });
+    */
+
+    time.onPerMinute(function() {
+        const angle = time.getHours() * 15;
+        subdial_24_widget.setProperty(hmUI.prop.ANGLE, angle);
+    })
 
     time.onPerDay(function() {
         const angle_day = time.getDate() * 11.613;
