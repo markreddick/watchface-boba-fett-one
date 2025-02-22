@@ -1,9 +1,10 @@
 import * as hmUI from '@zos/ui';
-import { Time } from '@zos/sensor'
+import { Screen, Time } from '@zos/sensor'
 
 export function buildView() {
 
     const time = new Time();
+    const screen = new Screen();
 
     hmUI.createWidget(hmUI.widget.IMG, {
         x: px(0),
@@ -109,15 +110,31 @@ export function buildView() {
     });
     */
 
-    time.onPerMinute(function() {
-        const angle = time.getHours() * 15;
+    let update24HourDial = function() {
+        let angle = time.getHours() * 15;
         subdial_24_widget.setProperty(hmUI.prop.ANGLE, angle);
+    };
+
+    let updateDateDials = function() {
+        let angle_day = time.getDate() * 11.613;
+        let angle_dow = time.getDay() * 51.429;
+        subdial_day_widget.setProperty(hmUI.prop.ANGLE, angle_day);
+        subdial_dow_widget.setProperty(hmUI.prop.ANGLE, angle_dow);
+
+    };
+
+    time.onPerMinute(function() {
+        update24HourDial();
     })
 
     time.onPerDay(function() {
-        const angle_day = time.getDate() * 11.613;
-        const angle_dow = time.getDay() * 51.429;
-        subdial_day_widget.setProperty(hmUI.prop.ANGLE, angle_day);
-        subdial_dow_widget.setProperty(hmUI.prop.ANGLE, angle_dow);
+        updateDateDials();
+    });
+
+    screen.onChange(function() {
+        if (screen.getStatus() == 1) {
+            update24HourDial();
+            updateDateDials();
+        }
     });
 }
