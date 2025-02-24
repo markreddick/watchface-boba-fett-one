@@ -1,11 +1,15 @@
 import * as view from "./view.js";
 
 WatchFace({
-  onInit() {
+  onInit() { 
   },
 
   build() {
-    view.buildView();
+    let time = getApp()._options.globalData.time;
+    view.buildView(time.getHours());
+    time.onPerHourEnd(function() {
+      view.updateHours(time.getHours())
+    });
   },
 
   onDestroy() {

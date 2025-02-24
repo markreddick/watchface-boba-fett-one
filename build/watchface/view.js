@@ -1,10 +1,8 @@
 import * as hmUI from '@zos/ui';
-import { Screen, Time } from '@zos/sensor'
 
-export function buildView() {
+let subdial_24_widget = null;
 
-    const time = new Time();
-    const screen = new Screen();
+export function buildView(hours) {
 
     hmUI.createWidget(hmUI.widget.IMG, {
         x: px(0),
@@ -24,8 +22,8 @@ export function buildView() {
         show_level: hmUI.show_level.ONLY_AOD,
     });
 
-    const angle_24 = time.getHours() * 15;
-    let subdial_24_widget = hmUI.createWidget(hmUI.widget.IMG, {
+    const angle_24 = hours * 15;
+    subdial_24_widget = hmUI.createWidget(hmUI.widget.IMG, {
         src: 'hand-24-square.png',
         x: 184,
         y: 290,
@@ -39,33 +37,27 @@ export function buildView() {
         show_level: hmUI.show_level.ONLY_NORMAL,
     });
 
-    const angle_day = time.getDate() * 11.613;
-    let subdial_day_widget = hmUI.createWidget(hmUI.widget.IMG, {
-        src: 'hand-subdial-square.png',
-        x: 277,
-        y: 184,
-        w: 112,
-        h: 112,
-        pos_x: 0,
-        pos_y: 0,
-        center_x: 55,
-        center_y: 56,
-        angle: angle_day,
+    hmUI.createWidget(hmUI.widget.DATE_POINTER, {
+        center_x: 144,
+        center_y: 240,
+        src: 'hand-subdial.png',
+        posX: 9,
+        posY: 57,
+        start_angle: 0,
+        end_angle: 360,
+        type: hmUI.date.WEEK,
         show_level: hmUI.show_level.ONLY_NORMAL,
-    });
+   });
 
-    const angle_dow = time.getDay() * 51.429;
-    let subdial_dow_widget = hmUI.createWidget(hmUI.widget.IMG, {
-        src: 'hand-subdial-square.png',
-        x: 88,
-        y: 185,
-        w: 112,
-        h: 112,
-        pos_x: 0,
-        pos_y: 0,
-        center_x: 55,
-        center_y: 56,
-        angle: angle_dow,
+   hmUI.createWidget(hmUI.widget.DATE_POINTER, {
+        center_x: 333,
+        center_y: 240,
+        src: 'hand-subdial.png',
+        posX: 9,
+        posY: 57,
+        start_angle: 2,
+        end_angle: 360,
+        type: hmUI.date.DAY,
         show_level: hmUI.show_level.ONLY_NORMAL,
     });
 
@@ -85,7 +77,7 @@ export function buildView() {
         second_posX: 10,
         second_posY: 190,
         second_path: 'hand-second.png',
-        show_level: hmUI.show_level.ONLY_NORMAL,
+        show_level: hmUI.show_level.ONLY_NORMAL
     });
 
     hmUI.createWidget(hmUI.widget.TIME_POINTER, {
@@ -101,40 +93,10 @@ export function buildView() {
         minute_path: 'hand-minute-aod.png',
         show_level: hmUI.show_level.ONLY_AOD,
     });
+}
 
-    /* hour listener didn't seem to be working - actual watchface was not updating
-    so going to use minute listener for now
-    time.onPerHourEnd(function() {
-        const angle = time.getHours() * 15;
-        subdial_24_widget.setProperty(hmUI.prop.ANGLE, angle);
-    });
-    */
-
-    let update24HourDial = function() {
-        let angle = time.getHours() * 15;
-        subdial_24_widget.setProperty(hmUI.prop.ANGLE, angle);
-    };
-
-    let updateDateDials = function() {
-        let angle_day = time.getDate() * 11.613;
-        let angle_dow = time.getDay() * 51.429;
-        subdial_day_widget.setProperty(hmUI.prop.ANGLE, angle_day);
-        subdial_dow_widget.setProperty(hmUI.prop.ANGLE, angle_dow);
-
-    };
-
-    time.onPerMinute(function() {
-        update24HourDial();
-    })
-
-    time.onPerDay(function() {
-        updateDateDials();
-    });
-
-    screen.onChange(function() {
-        if (screen.getStatus() == 1) {
-            update24HourDial();
-            updateDateDials();
-        }
-    });
+export function updateHours(hours)
+{
+    let angle = hours * 15;
+    subdial_24_widget.setProperty(hmUI.prop.ANGLE, angle);
 }
